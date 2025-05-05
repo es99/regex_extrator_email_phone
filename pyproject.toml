@@ -1,0 +1,22 @@
+[project]
+name = "project-one"
+version = "0.1.0"
+description = "Lê um texto da área de transferência e extrai telefones e emails utilizando regex"
+authors = [
+    {name = "engels",email = "engels.franca@icloud.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pycodestyle (>=2.13.0,<3.0.0)",
+    "black (>=25.1.0,<26.0.0)",
+    "pydocstyle (>=6.3.0,<7.0.0)",
+    "pyperclip (>=1.9.0,<2.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "project_one", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

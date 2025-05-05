@@ -1,0 +1,23 @@
+name: Integração Contínua
+on: [push, pull_request]
+
+jobs:
+    linter:
+        runs-on: ubuntu_latest
+
+        steps:
+            - name: Copia workspace e instala o Python
+              uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version:  '3.11'
+
+            - name: Instala o Poetry
+              uses: Gr1N/setup-poetry@v8
+            - run: poetry --version
+
+            - name: Executa os linters
+              run: | 
+                poetry run black --check src/
+                poetry run pycodestyle src/
+                poetry run pydocstyle src/
