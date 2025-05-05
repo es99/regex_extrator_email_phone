@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
     linter:
-        runs-on: ubuntu_latest
+        runs-on: ubuntu-latest
 
         steps:
             - name: Copia workspace e instala o Python
