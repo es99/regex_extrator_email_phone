@@ -2,6 +2,25 @@ name: Integração Contínua
 on: [push, pull_request]
 
 jobs:
+    unittests:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Copia o workspace e instala o Python
+              uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version: '3.11'
+
+            - name: Instala o Poetry
+              uses: Gr1N/setup-poetry@v8
+            - run: poetry --version
+
+            - name: Instala as dependências
+              run: poetry install
+
+            - name: Executa os testes unitários
+              run: poetry run python -m unittest discover -s tests
     linter:
         runs-on: ubuntu-latest
 
@@ -20,10 +39,16 @@ jobs:
               run: poetry install
 
             - name: Executa o black
-              run: poetry run black --check src/
+              run: |
+                poetry run black --check src/
+                poetry run black --check tests/
                 
             - name: Executa o PycodeStyle
-              run: poetry run pycodestyle src/
+              run: |
+                poetry run pycodestyle src/
+                poetry run pycodestyle tests/
                 
             - name: Executa o PyDocStyle  
-              run: poetry run pydocstyle src/
+              run: |
+                poetry run pydocstyle src/
+                poetry run pydocstyle tests/
