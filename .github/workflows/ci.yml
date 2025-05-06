@@ -43,12 +43,12 @@ jobs:
                 poetry run black --check src/
                 poetry run black --check tests/
                 
-            - name: Executa o PycodeStyle
+            - name: Executa o PycodeStyle em src e tests
               run: |
                 poetry run pycodestyle src/
                 poetry run pycodestyle tests/
                 
-            - name: Executa o PyDocStyle  
+            - name: Executa o PyDocStyle  em src e tests
               run: |
                 poetry run pydocstyle src/
                 poetry run pydocstyle tests/
