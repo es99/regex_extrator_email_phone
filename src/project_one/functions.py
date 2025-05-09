@@ -22,6 +22,17 @@ telRegex = re.compile(
     re.VERBOSE,
 )
 
+dataRegex = re.compile(
+    r"""
+    (\d{1,4})                 # primeira parte
+    (?:\.|-|\s|/)?          # separador
+    ([a-zA-Z]+|\d{1,2})   # segunda parte
+    (?:\.|-|\s|/)?          # separador
+    (\d{2,4})                 # terceira parte
+    """,
+    re.VERBOSE,
+)
+
 
 def regexEmail(text, regex=emailRegex):
     """Recebe um texto e um objeto regex e retorna os objetos \
@@ -38,3 +49,10 @@ def regexPhone(text, regex=telRegex):
     for match in matches:
         telsFound.append(match.group(0).strip())
     return telsFound if matches else None
+
+
+def regexData(text, regex=dataRegex):
+    """Recebe um texto e um objeto regex e retorna uma lista \
+    das correspondências."""
+    limpaDatas = regex.sub(r"\1-\2-\3", text)
+    return limpaDatas

@@ -1,7 +1,7 @@
 """Testes unitários das funcões regex localizadas no arquivo 'functions.py'."""
 
 import unittest
-from src.project_one.functions import regexEmail, regexPhone
+from src.project_one.functions import regexEmail, regexPhone, regexData
 
 
 class TestRegexs(unittest.TestCase):
@@ -21,3 +21,11 @@ class TestRegexs(unittest.TestCase):
         matches = regexPhone(text)
         resultado = ["(11)982013135", "3226-4992", "8398201-3135"]
         self.assertEqual(matches, resultado)
+
+    def test_regex_data(self):
+        """Teste unitario da funcado que recebe a\
+        regex de padroes de datas."""
+        text = "08.Mai.2025, 8 Maio 2025, 08/05/2025, 08052025"
+        listaRetornada = regexData(text)
+        resultadoEsperado = "08-Mai-2025, 8-Maio-2025, 08-05-2025, 08-05-2025"
+        self.assertEqual(listaRetornada, resultadoEsperado)
